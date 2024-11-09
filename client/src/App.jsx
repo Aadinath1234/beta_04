@@ -89,7 +89,8 @@ import axios from 'axios';
 import RewardTree from './components/RewardTree/RewardTree.jsx';
 import Video from './components/Video/Video.jsx'; 
 import Bubble from './components/Games/Bubble/Bubble.jsx'; 
-import HeroCard from './components/HeroCard/HeroCard.jsx'; 
+import HeroCard from './components/HeroCard/HeroCard.jsx';
+import HeroCard2 from './components/HeroCard/HeroCard2.jsx';  
 import ColorMatch from './components/Games/ColorMatch/colorMatch.jsx'; 
 
 axios.defaults.baseURL = 'http://localhost:8080'; 
@@ -117,14 +118,19 @@ const App = () => {
           <Route path='/video' element={<Video />} />
           <Route path='/bubble' element={<Bubble/>} />
           <Route path='/color' element={<ColorMatch />} />
-          
-          {/* Dynamic Routes for HeroCard with sections */}
+          <Route path='/HeroCard' element={<HeroCard />} />
+          <Route path='/HeroCard2' element={<HeroCard2 />} />
+{/*           
+          Dynamic Routes for HeroCard with sections
           <Route path="/section1" element={<HeroCard section="1" />} />
           <Route path="/section2" element={<HeroCard section="2" />} />
           <Route path="/section3" element={<HeroCard section="3" />} />
           <Route path="/section4" element={<HeroCard section="4" />} />
           <Route path="/section5" element={<HeroCard section="5" />} />
-          <Route path="/section6" element={<HeroCard section="6" />} />
+          <Route path="/section6" element={<HeroCard section="6" />} /> */}
+
+
+
         </Routes>
       </Router>
     </>

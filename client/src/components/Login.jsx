@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import PlaceFormPage from '../pages/PlacesFormPage.jsx'
+import PlaceFormPage from '../pages/PlacesFormPage.jsx'; 
+import HeroCard from './HeroCard/HeroCard2.jsx';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +42,7 @@ const Login = () => {
         toast.success(res.data.message);
         if (isLogin) {
           dispatch(setUser(res.data.user));
-          navigate('/');
+          navigate('/HeroCard');
         } else {
           setIsLogin(true);
         }

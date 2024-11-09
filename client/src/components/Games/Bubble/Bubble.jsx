@@ -64,7 +64,6 @@
 
 
 
-
 // BubblePopGame.js
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -87,7 +86,7 @@ function BubblePopGame() {
         x: Math.random() * 100,
         y: Math.random() * 100,
         size: Math.random() * 40 + 20,
-        color: colors[Math.floor(Math.random() * colors.length)]
+        color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
     setBubbles(newBubbles);
@@ -95,8 +94,13 @@ function BubblePopGame() {
   };
 
   const popBubble = (id) => {
-    setBubbles(bubbles.filter(bubble => bubble.id !== id));
-    setScore(score + 1);
+    setBubbles((prevBubbles) => prevBubbles.filter((bubble) => bubble.id !== id));
+    setScore((prevScore) => {
+      const newScore = prevScore + 1;
+      const totalOverAllScore = Number(localStorage.getItem('totalScore')) || 0;
+      localStorage.setItem('totalScore', totalOverAllScore + 1);
+      return newScore;
+    });
   };
 
   return (
@@ -104,7 +108,7 @@ function BubblePopGame() {
       <h1 className="text-2xl font-bold text-center mb-4">Bubble Pop Game</h1>
       <p className="text-center mb-4">Pop the bubbles to relieve stress! Score: {score}</p>
       <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4">
-        {bubbles.map(bubble => (
+        {bubbles.map((bubble) => (
           <div
             key={bubble.id}
             className={`absolute rounded-full ${bubble.color} cursor-pointer transition-transform transform hover:scale-110`}
@@ -120,7 +124,9 @@ function BubblePopGame() {
         ))}
       </div>
       <div className="text-center">
-        <button onClick={generateBubbles} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">Reset Game</button>
+        <button onClick={generateBubbles} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+          Reset Game
+        </button>
         <Link to="/color">
           <button className="bg-green-500 text-white px-4 py-2 rounded">Play Color Match Game</button>
         </Link>
