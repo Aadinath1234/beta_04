@@ -130,6 +130,11 @@ function BubblePopGame() {
         <Link to="/color">
           <button className="bg-green-500 text-white px-4 py-2 rounded">Play Color Match Game</button>
         </Link>
+
+        <Link to="/memory">
+          <button className="bg-red-500 text-white px-4 py-2 rounded">Play Memory games</button>
+        </Link>
+
       </div>
     </div>
   );

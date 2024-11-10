@@ -92,6 +92,8 @@ import Bubble from './components/Games/Bubble/Bubble.jsx';
 import HeroCard from './components/HeroCard/HeroCard.jsx';
 import HeroCard2 from './components/HeroCard/HeroCard2.jsx';  
 import ColorMatch from './components/Games/ColorMatch/colorMatch.jsx'; 
+import Memory from './components/Games/Memory/Memory.jsx'; 
+
 
 axios.defaults.baseURL = 'http://localhost:8080'; 
 axios.defaults.withCredentials = true; 
@@ -118,6 +120,7 @@ const App = () => {
           <Route path='/video' element={<Video />} />
           <Route path='/bubble' element={<Bubble/>} />
           <Route path='/color' element={<ColorMatch />} />
+          <Route  path='/memory' element={<Memory />}   />
           <Route path='/HeroCard' element={<HeroCard />} />
           <Route path='/HeroCard2' element={<HeroCard2 />} />
 {/*           

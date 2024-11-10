@@ -333,9 +333,9 @@ const ServiceData = [
         link: "/books",
     },
     {
-        title: "Diary",
-        content: "Diary for mental health",
-        description: "Writing in a diary provides a private space to express emotions and reflect.",
+        title: "Community and  Blogs",
+        content: "community to share experiences",
+        description: "Writing in a blogs provides a  space to express emotions and reflect.",
         img: Diary,
         aosDelay: "700",
         link: "https://repo-frontend-0ixl.onrender.com/",
@@ -346,7 +346,7 @@ const ServiceData = [
         description: "Discover stress-relief techniques to bring calm and balance.",
         img: Video,
         aosDelay: "700",
-        link: "https://youtube.com/playlist?list=PLWlTX25IDqIz4Ad4_ZvTQ_rM07Lkr7g-4&si=tEy9dzygmcYuXWM0",
+        link: "https://youtube.com/playlist?list=PLi7xA3cpIGd3p6E-YKRVozq2l51H0AE9S&si=rBPAVRzp2CP9_Aob",
     },
 ];
 
