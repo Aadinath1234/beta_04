@@ -229,6 +229,6 @@ export default function ColorMatcher() {
       <p className="text-lg mb-2">Score: {score}</p>
       <p className="text-lg mb-2">Match: {matchPercentage}%</p>
       <p className="text-xl font-semibold text-purple-700">{feedback}</p>
-    </div>
+    </div>               
   );
 }
