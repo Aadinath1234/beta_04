@@ -1,159 +1,124 @@
-// import React, { useEffect } from 'react';
-
-// const BreathingSection = () => {
-//   useEffect(() => {
-//     const container = document.getElementById('container');
-//     const text = document.getElementById('text');
-
-//     const totalTime = 7500;
-//     const breatheTime = (totalTime / 5) * 2;
-//     const holdTime = totalTime / 5;
-
-//     function breathAnimation() {
-//       text.innerText = 'Breathe In!';
-//       container.classList.add('grow');
-//       container.classList.remove('shrink');
-
-//       setTimeout(() => {
-//         text.innerText = 'Hold';
-
-//         setTimeout(() => {
-//           text.innerText = 'Breathe Out!';
-//           container.classList.add('shrink');
-//           container.classList.remove('grow');
-//         }, holdTime);
-//       }, breatheTime);
-//     }
-
-//     breathAnimation();
-//     const interval = setInterval(breathAnimation, totalTime);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return (
-//     <div className="flex flex-col items-center justify-center h-screen bg-[#224941] text-white font-montserrat overflow-hidden">
-//       <div
-//         id="container"
-//         className="container flex items-center justify-center w-72 h-72 relative"
-//       >
-//         <div className="absolute top-0 left-0 w-full h-full bg-[#010f1c] rounded-full z-[-1]" />
-//         <div
-//           className="absolute top-[-10px] left-[-10px] w-[320px] h-[320px] rounded-full
-//             bg-gradient-conic from-[#55b7a4] via-[#4ca493] via-[40%] to-[#2a5b52]"
-//         />
-//         <div className="absolute top-[-40px] left-[140px] w-5 h-48 pointer-container animate-rotate transform-origin-bottom-center">
-//           <span className="block w-5 h-5 bg-white rounded-full"></span>
-//         </div>
-//       </div>
-//       <p id="text" className="mt-5 text-2xl">
-//         Breathe In!
-//       </p>
-//     </div>
-//   );
-// };
-
-// export default BreathingSection;
-
-
-
-
-
-// import React, { useEffect } from 'react';
-
-// const BreathingSection = () => {
-//   useEffect(() => {
-//     const container = document.getElementById('container');
-//     const text = document.getElementById('text');
-
-//     const totalTime = 7500;
-//     const breatheTime = (totalTime / 5) * 2;
-//     const holdTime = totalTime / 5;
-
-//     function breathAnimation() {
-//       text.innerText = 'Breathe In';
-//       container.classList.add('animate-grow');
-//       container.classList.remove('animate-shrink');
-
-//       setTimeout(() => {
-//         text.innerText = 'Hold';
-
-//         setTimeout(() => {
-//           text.innerText = 'Breathe Out';
-//           container.classList.add('animate-shrink');
-//           container.classList.remove('animate-grow');
-//         }, holdTime);
-//       }, breatheTime);
-//     }
-
-//     breathAnimation();
-//     const interval = setInterval(breathAnimation, totalTime);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return (
-//     <div className="flex flex-col items-center justify-center h-screen bg-[#224941] text-white font-montserrat overflow-hidden">
-//       <div
-//         id="container"
-//         className="flex items-center justify-center w-70 h-70 relative transition-transform duration-[5s] ease-in-out"
-//       >
-//         <div className="absolute w-full h-full bg-[#010f1c] rounded-full animate-pulse" />
-//         <div
-//           className="absolute w-[320px] h-[320px] rounded-full
-//             bg-gradient-to-r from-[#55b7a4] via-[#4ca493] to-[#2a5b52] opacity-80 animate-spin-slow"
-//         />
-//         <div className="absolute w-5 h-5 bg-white rounded-full animate-ping" style={{ top: '-20px' }} />
-//       </div>
-//       <p id="text" className="mt-8 text-2xl "> {/* Adjusted margin here */}
-       
-//       </p>
-//     </div>
-//   );
-// };
-
-// export default BreathingSection;
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect, useRef } from 'react';
 // import { motion } from 'framer-motion';
 
 // export default function BreathingExercise() {
 //   const [phase, setPhase] = useState('inhale');
 //   const [counter, setCounter] = useState(4);
 //   const [isActive, setIsActive] = useState(false);
+//   const [score, setScore] = useState(0);
+//   const [leaves, setLeaves] = useState(0);
+//   const [totalScore, setTotalScore] = useState(0);
+//   const audioRef = useRef(null);
 
+//   // Load state from localStorage
+//   useEffect(() => {
+//     const savedScore = localStorage.getItem('breathingExerciseScore');
+//     const savedLeaves = localStorage.getItem('breathingExerciseLeaves');
+//     const savedTotalScore = localStorage.getItem('totalScore');
+//     const savedActiveState = localStorage.getItem('breathingExerciseIsActive');
+
+//     if (savedScore) setScore(Number(savedScore));
+//     if (savedLeaves) setLeaves(Number(savedLeaves));
+//     if (savedTotalScore) setTotalScore(Number(savedTotalScore));
+//     if (savedActiveState === 'true') setIsActive(true);
+//   }, []);
+
+//   // Update the score and leaves, and save them to localStorage
+//   const handleScoreAndLeaf = (phaseType) => {
+//     let newScore = score;
+//     let newLeaves = leaves;
+//     let newTotalScore = totalScore;
+
+//     switch (phaseType) {
+//       case 'inhale':
+//         newScore += 1;
+//         newLeaves += 1;
+//         newTotalScore += 1;
+//         break;
+//       case 'hold':
+//         newScore += 2;
+//         newLeaves += 1;
+//         newTotalScore += 2;
+//         break;
+//       case 'exhale':
+//         newScore += 1;
+//         newLeaves += 1;
+//         newTotalScore += 1;
+//         break;
+//       default:
+//         break;
+//     }
+
+//     setScore(newScore);
+//     setLeaves(newLeaves);
+//     setTotalScore(newTotalScore);
+
+//     localStorage.setItem('breathingExerciseScore', newScore);
+//     localStorage.setItem('breathingExerciseLeaves', newLeaves);
+//     localStorage.setItem('totalScore', newTotalScore);
+//   };
+
+//   // Timer and phase management
 //   useEffect(() => {
 //     let timer;
-//     if (isActive) {
-//       timer = setInterval(() => {
-//         setCounter((prev) => {
-//           if (prev === 1) {
-//             setPhase((currentPhase) => {
-//               switch (currentPhase) {
-//                 case 'inhale':
-//                   return 'hold';
-//                 case 'hold':
-//                   return 'exhale';
-//                 case 'exhale':
-//                   return 'inhale';
-//                 default:
-//                   return 'inhale';
-//               }
-//             });
-//             return phase === 'hold' ? 7 : 4;
-//           }
-//           return prev - 1;
-//         });
-//       }, 1000);
-//     }
-//     return () => clearInterval(timer);
-//   }, [phase, isActive]);
 
-//   const toggleExercise = () => setIsActive(!isActive);
+//     if (isActive) {
+//       if (counter > 0) {
+//         timer = setInterval(() => {
+//           setCounter((prevCounter) => prevCounter - 1);
+//         }, 1000);
+//       } else {
+//         if (phase === 'inhale') {
+//           setPhase('hold');
+//           setCounter(4);
+//           handleScoreAndLeaf('inhale');
+//         } else if (phase === 'hold') {
+//           setPhase('exhale');
+//           setCounter(4);
+//           handleScoreAndLeaf('hold');
+//         } else if (phase === 'exhale') {
+//           setPhase('inhale');
+//           setCounter(4);
+//           handleScoreAndLeaf('exhale');
+//         }
+//       }
+//     } else {
+//       clearInterval(timer);
+//     }
+
+//     return () => clearInterval(timer);
+//   }, [isActive, counter, phase]);
+
+//   // Toggle exercise state
+//   const toggleExercise = () => {
+//     const newIsActive = !isActive;
+//     setIsActive(newIsActive);
+
+//     if (newIsActive) {
+//       audioRef.current.play().catch((err) => {
+//         console.warn('Audio playback failed. Interaction might be required.', err);
+//       });
+//     } else {
+//       audioRef.current.pause();
+//       audioRef.current.currentTime = 0;
+//     }
+
+//     localStorage.setItem('breathingExerciseIsActive', newIsActive.toString());
+//   };
+
+//   // Reset button logic
+//   const handleReset = () => {
+//     setScore(0);
+//     setLeaves(0);
+//     setTotalScore(0);
+//     setPhase('inhale');
+//     setCounter(4);
+
+//     localStorage.removeItem('breathingExerciseScore');
+//     localStorage.removeItem('breathingExerciseLeaves');
+//     localStorage.removeItem('totalScore');
+//     localStorage.removeItem('breathingExerciseIsActive');
+//   };
 
 //   return (
 //     <div className="text-center p-6 bg-gradient-to-r from-blue-100 to-green-100 rounded-lg shadow-lg">
@@ -170,12 +135,44 @@
 //       </p>
 //       <button
 //         onClick={toggleExercise}
-//         className={`px-6 py-3 rounded-full text-white font-semibold transition-colors ${
-//           isActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
-//         }`}
+//         className={px-6 py-3 rounded-full text-white font-semibold transition-colors ${isActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}}
 //       >
-//         {isActive ? 'Stop' : 'Start'} Exercise
+//         {isActive ? 'Stop' : 'Start'} 
 //       </button>
+//       <button
+//         onClick={handleReset}
+//         className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full transition-colors mt-4"
+//       >
+//         Reset
+//       </button>
+
+//       {/* Displaying the tree with leaves */}
+//       <div className="mt-8">
+//         <h3 className="text-2xl mb-4 text-blue-600">Progress</h3>
+//         <div className="flex justify-center items-center">
+//           <div className="tree-container relative">
+//             <div className="trunk w-10 h-40 bg-brown-600 rounded-b-lg absolute bottom-0 left-1/2 transform -translate-x-1/2"></div>
+//             <div className="leaves absolute bottom-16 left-1/2 transform -translate-x-1/2 flex">
+//               {Array.from({ length: leaves }).map((_, index) => (
+//                 <div
+//                   key={index}
+//                   className="leaf bg-white-500 rounded-full w-6 h-6 mx-1"
+//                   style={{
+//                     animation: 'leafFall 1s ease-in-out forwards',
+//                     animationDelay: ${index * 0.1}s
+//                   }}
+//                 />
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Audio element for music */}
+//       <audio ref={audioRef} loop>
+//         <source src="/music/relaxing-music.mp3" type="audio/mpeg" />
+//         Your browser does not support the audio element.
+//       </audio>
 //     </div>
 //   );
 // }
@@ -183,9 +180,7 @@
 
 
 
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function BreathingExercise() {
@@ -193,57 +188,24 @@ export default function BreathingExercise() {
   const [counter, setCounter] = useState(4);
   const [isActive, setIsActive] = useState(false);
   const [score, setScore] = useState(0);
-  const [leaves, setLeaves] = useState(0); // Track number of leaves
-  const [totalScore, setTotalScore] = useState(0); // Total score state
+  const [leaves, setLeaves] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
+  const audioRef = useRef(null);
 
+  // Load state from localStorage
   useEffect(() => {
     const savedScore = localStorage.getItem('breathingExerciseScore');
     const savedLeaves = localStorage.getItem('breathingExerciseLeaves');
-    const savedActiveState = localStorage.getItem('breathingExerciseIsActive');
     const savedTotalScore = localStorage.getItem('totalScore');
+    const savedActiveState = localStorage.getItem('breathingExerciseIsActive');
 
     if (savedScore) setScore(Number(savedScore));
     if (savedLeaves) setLeaves(Number(savedLeaves));
-    if (savedActiveState === 'true') setIsActive(true);
     if (savedTotalScore) setTotalScore(Number(savedTotalScore));
+    if (savedActiveState === 'true') setIsActive(true);
   }, []);
 
-  useEffect(() => {
-    let timer;
-    if (isActive) {
-      timer = setInterval(() => {
-        setCounter((prev) => {
-          if (prev === 1) {
-            setPhase((currentPhase) => {
-              switch (currentPhase) {
-                case 'inhale':
-                  handleScoreAndLeaf('inhale');
-                  return 'hold';
-                case 'hold':
-                  handleScoreAndLeaf('hold');
-                  return 'exhale';
-                case 'exhale':
-                  handleScoreAndLeaf('exhale');
-                  return 'inhale';
-                default:
-                  return 'inhale';
-              }
-            });
-            return phase === 'hold' ? 7 : 4;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [phase, isActive]);
-
-  const toggleExercise = () => {
-    const newIsActive = !isActive;
-    setIsActive(newIsActive);
-    localStorage.setItem('breathingExerciseIsActive', newIsActive.toString());
-  };
-
+  // Update the score and leaves, and save them to localStorage
   const handleScoreAndLeaf = (phaseType) => {
     let newScore = score;
     let newLeaves = leaves;
@@ -278,17 +240,66 @@ export default function BreathingExercise() {
     localStorage.setItem('totalScore', newTotalScore);
   };
 
+  // Timer and phase management
+  useEffect(() => {
+    let timer;
+
+    if (isActive) {
+      if (counter > 0) {
+        timer = setInterval(() => {
+          setCounter((prevCounter) => prevCounter - 1);
+        }, 1000);
+      } else {
+        if (phase === 'inhale') {
+          setPhase('hold');
+          setCounter(4);
+          handleScoreAndLeaf('inhale');
+        } else if (phase === 'hold') {
+          setPhase('exhale');
+          setCounter(4);
+          handleScoreAndLeaf('hold');
+        } else if (phase === 'exhale') {
+          setPhase('inhale');
+          setCounter(4);
+          handleScoreAndLeaf('exhale');
+        }
+      }
+    } else {
+      clearInterval(timer);
+    }
+
+    return () => clearInterval(timer);
+  }, [isActive, counter, phase]);
+
+  // Toggle exercise state
+  const toggleExercise = () => {
+    const newIsActive = !isActive;
+    setIsActive(newIsActive);
+
+    if (newIsActive) {
+      audioRef.current.play().catch((err) => {
+        console.warn('Audio playback failed. Interaction might be required.', err);
+      });
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    localStorage.setItem('breathingExerciseIsActive', newIsActive.toString());
+  };
+
+  // Reset button logic
   const handleReset = () => {
     setScore(0);
     setLeaves(0);
-    setIsActive(false);
+    setTotalScore(0);
     setPhase('inhale');
     setCounter(4);
-    setTotalScore(0);
-    localStorage.setItem('breathingExerciseScore', 0);
-    localStorage.setItem('breathingExerciseLeaves', 0);
-    localStorage.setItem('breathingExerciseIsActive', 'false');
-    localStorage.setItem('totalScore', 0);
+
+    localStorage.removeItem('breathingExerciseScore');
+    localStorage.removeItem('breathingExerciseLeaves');
+    localStorage.removeItem('totalScore');
+    localStorage.removeItem('breathingExerciseIsActive');
   };
 
   return (
@@ -310,7 +321,7 @@ export default function BreathingExercise() {
           isActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
         }`}
       >
-        {isActive ? 'Stop' : 'Start'} 
+        {isActive ? 'Stop' : 'Start'}
       </button>
       <button
         onClick={handleReset}
@@ -340,6 +351,12 @@ export default function BreathingExercise() {
           </div>
         </div>
       </div>
+
+      {/* Audio element for music */}
+      <audio ref={audioRef} loop>
+        <source src="/music/relaxing-music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 }
