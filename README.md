@@ -36,5 +36,5 @@ npm start
 
 
 
-### deployed link: https://mindscool.netlify.app/
+
 
