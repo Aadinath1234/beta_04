@@ -34,3 +34,7 @@ To run the app locally, use the following command:
 
 npm start
 
+
+
+### deployed link: https://mindscool.netlify.app/
+
